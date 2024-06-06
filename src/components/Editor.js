@@ -29,7 +29,7 @@ const Editor = () => {
   const [value, setValue] = useState([
     {
       type: 'paragraph',
-      children: [{ text: 'This is editable rich text, much better than a textarea!' }],
+      children: [{ text: 'This is editable rich text, much better than a text area!' }],
     },
   ]);
 
@@ -96,7 +96,7 @@ const Editor = () => {
           <Editable
             renderElement={renderElement}
             renderLeaf={renderLeaf}
-            placeholder="Enter some rich text..."
+            placeholder="Enter any text..."
           />
         </Slate>
       </div>
