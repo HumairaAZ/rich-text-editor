@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Button, ButtonGroup, Tooltip, Popover } from '@material-ui/core';
 import { FormatBold, FormatItalic, FormatUnderlined, StrikethroughS, FormatColorText, FormatAlignLeft, FormatAlignCenter, FormatAlignRight } from '@material-ui/icons';
 import { SketchPicker } from 'react-color';
-import { Editor, Transforms, Text } from 'slate';
+import { Editor, Transforms } from 'slate';
 
 const isMarkActive = (editor, format) => {
   const marks = Editor.marks(editor);
@@ -34,11 +34,6 @@ const Toolbar = ({ editor }) => {
 
   const handleColorChange = (color) => {
     setColor(color.hex);
-    Transforms.setNodes(
-      editor,
-      { color: color.hex },
-      { match: n => Text.isText(n), split: true }
-    );
     Editor.addMark(editor, 'color', color.hex);
   };
 
