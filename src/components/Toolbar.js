@@ -1,9 +1,9 @@
 // src/components/Toolbar.js
 
 import React from 'react';
-import { Button, ButtonGroup, IconButton, Tooltip } from '@material-ui/core';
+import { Button, ButtonGroup } from '@material-ui/core';
 import { FormatBold, FormatItalic, FormatUnderlined, StrikethroughS, FormatColorText, FormatAlignLeft, FormatAlignCenter, FormatAlignRight } from '@material-ui/icons';
-import { Editor, Transforms, Text } from 'slate';
+import { Editor, Transforms } from 'slate';
 import { SketchPicker } from 'react-color';
 
 const isMarkActive = (editor, format) => {
