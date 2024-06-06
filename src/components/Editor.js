@@ -2,7 +2,6 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { Slate, Editable, withReact } from 'slate-react';
 import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
-import { jsx } from 'slate-hyperscript';
 
 const Editor = () => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
