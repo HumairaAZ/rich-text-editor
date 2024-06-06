@@ -25,11 +25,19 @@ const Editor = () => {
       children: [{ text: 'This is editable rich text, much better than a textarea!' }],
     },
   ]);
+  const [color, setColor] = useState('#000000');
 
   const renderElement = useCallback((props) => {
     switch (props.element.type) {
       case 'paragraph':
-        return <p {...props.attributes}>{props.children}</p>;
+        return (
+          <p
+            {...props.attributes}
+            style={{ textAlign: props.element.align }}
+          >
+            {props.children}
+          </p>
+        );
       default:
         return <p {...props.attributes}>{props.children}</p>;
     }
@@ -44,6 +52,7 @@ const Editor = () => {
           fontStyle: props.leaf.italic ? 'italic' : 'normal',
           textDecoration: props.leaf.underlined ? 'underline' : 'none',
           textDecorationLine: props.leaf.strikethrough ? 'line-through' : 'none',
+          color: props.leaf.color ? props.leaf.color : 'inherit',
         }}
       >
         {props.children}
@@ -51,11 +60,29 @@ const Editor = () => {
     );
   }, []);
 
+  const handleChange = (newValue) => {
+    setValue(newValue);
+    const { selection } = editor;
+    if (selection) {
+      const [match] = Editor.nodes(editor, {
+        match: n => n.type === 'paragraph',
+      });
+
+      if (match) {
+        Transforms.setNodes(
+          editor,
+          { color: color },
+          { match: n => Text.isText(n), split: true }
+        );
+      }
+    }
+  };
+
   return (
     <div>
-      <Toolbar editor={editor} />
+      <Toolbar editor={editor} setColor={setColor} />
       <div className={classes.editorContainer}>
-        <Slate editor={editor} value={value} onChange={value => setValue(value)}>
+        <Slate editor={editor} value={value} onChange={handleChange}>
           <Editable
             renderElement={renderElement}
             renderLeaf={renderLeaf}
