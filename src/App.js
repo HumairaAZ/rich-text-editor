@@ -48,7 +48,7 @@ function App() {
         </Paper>
       </Container>
       <footer className={classes.footer}>
-        <Typography variant="body1">© 2024 Your Name. All rights reserved.</Typography>
+        <Typography variant="body1">© 2024 Humaira Azmi. All rights reserved.</Typography>
       </footer>
     </div>
   );
