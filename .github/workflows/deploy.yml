@@ -29,8 +29,7 @@ jobs:
           git config --global user.name "humairaazmi"
 
       - name: Deploy to GitHub Pages
-        run: npm run deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          npx gh-pages -d build --repo https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
