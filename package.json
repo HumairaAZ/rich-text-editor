@@ -18,6 +18,7 @@
    "slate": "^0.66.0",
     "slate-react": "^0.66.0",
     "slate-history": "^0.66.0"
+    "slate-hyperscript": "^0.66.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.0",
