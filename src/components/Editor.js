@@ -88,39 +88,6 @@ const Editor = () => {
     }, 0);
   }, 0);
 
-  editor.toggleMark = (format) => {
-    const isActive = Text.isText(format);
-    if (isActive) {
-      Transforms.setNodes(
-        editor,
-        { [format]: false },
-        { match: n => Text.isText(n), split: true }
-      );
-    } else {
-      Transforms.setNodes(
-        editor,
-        { [format]: true },
-        { match: n => Text.isText(n), split: true }
-      );
-    }
-  };
-
-  editor.addMark = (format, value) => {
-    Transforms.setNodes(
-      editor,
-      { [format]: value },
-      { match: n => Text.isText(n), split: true }
-    );
-  };
-
-  editor.alignText = (align) => {
-    Transforms.setNodes(
-      editor,
-      { align: align },
-      { match: n => Editor.isBlock(editor, n) }
-    );
-  };
-
   return (
     <div>
       <Toolbar editor={editor} />
