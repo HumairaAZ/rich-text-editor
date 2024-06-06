@@ -1,9 +1,8 @@
 // src/components/Toolbar.js
 
-import React, { useState } from 'react';
-import { Button, ButtonGroup, Tooltip, Popover } from '@material-ui/core';
-import { FormatBold, FormatItalic, FormatUnderlined, StrikethroughS, FormatColorText, FormatAlignLeft, FormatAlignCenter, FormatAlignRight } from '@material-ui/icons';
-import { SketchPicker } from 'react-color';
+import React from 'react';
+import { Button, ButtonGroup, Tooltip } from '@material-ui/core';
+import { FormatBold, FormatItalic, FormatUnderlined, StrikethroughS, FormatAlignLeft, FormatAlignCenter, FormatAlignRight } from '@material-ui/icons';
 import { Editor, Transforms } from 'slate';
 
 const isMarkActive = (editor, format) => {
@@ -21,25 +20,6 @@ const toggleMark = (editor, format) => {
 };
 
 const Toolbar = ({ editor }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [color, setColor] = useState('#000000');
-
-  const handleColorClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleColorClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleColorChange = (color) => {
-    setColor(color.hex);
-    Editor.addMark(editor, 'color', color.hex);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? 'color-popover' : undefined;
-
   return (
     <div>
       <ButtonGroup variant="contained" color="primary" aria-label="outlined primary button group">
@@ -75,31 +55,7 @@ const Toolbar = ({ editor }) => {
             <StrikethroughS />
           </Button>
         </Tooltip>
-        <Tooltip title="Text Color">
-          <Button onMouseDown={handleColorClick}>
-            <FormatColorText />
-          </Button>
-        </Tooltip>
       </ButtonGroup>
-      <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleColorClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-      >
-        <SketchPicker
-          color={color}
-          onChangeComplete={handleColorChange}
-        />
-      </Popover>
       <ButtonGroup variant="contained" color="primary" aria-label="outlined primary button group" style={{ marginLeft: '10px' }}>
         <Tooltip title="Align Left">
           <Button onMouseDown={(event) => {
