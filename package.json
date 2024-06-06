@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A content creation and editing tool with rich text editing features using Slate.js",
   "main": "index.js",
-  "homepage": "https://<your-username>.github.io/rich-text-editor",
+  "homepage": "https://HumairaAZ.github.io/rich-text-editor",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -15,9 +15,9 @@
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "slate": "^0.66.5",
-    "slate-react": "^0.66.5",
-    "slate-history": "^0.66.5"
+    "slate": "^0.66.6",
+    "slate-react": "^0.66.6",
+    "slate-history": "^0.67.0"
   },
   "devDependencies": {
     "react-scripts": "4.0.3",
