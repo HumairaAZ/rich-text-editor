@@ -1,11 +1,12 @@
 // src/components/Editor.js
 
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import { Slate, Editable, withReact } from 'slate-react';
 import { createEditor, Transforms, Text } from 'slate';
 import { withHistory } from 'slate-history';
 import Toolbar from './Toolbar';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   editorContainer: {
@@ -15,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[1],
   },
   wordCount: {
+    marginTop: theme.spacing(2),
+  },
+  saveButton: {
     marginTop: theme.spacing(2),
   },
 }));
@@ -29,6 +33,13 @@ const Editor = () => {
     },
   ]);
   const [color, setColor] = useState('#000000');
+
+  useEffect(() => {
+    const savedData = localStorage.getItem('content');
+    if (savedData) {
+      setValue(JSON.parse(savedData));
+    }
+  }, []);
 
   const renderElement = useCallback((props) => {
     switch (props.element.type) {
@@ -81,6 +92,11 @@ const Editor = () => {
     }
   };
 
+  const handleSave = () => {
+    localStorage.setItem('content', JSON.stringify(value));
+    alert('Content saved!');
+  };
+
   const wordCount = value.reduce((acc, node) => {
     return acc + node.children.reduce((innerAcc, n) => {
       return innerAcc + (n.text.match(/\w+/g) || []).length;
@@ -102,6 +118,9 @@ const Editor = () => {
       <div className={classes.wordCount}>
         Word Count: {wordCount}
       </div>
+      <Button variant="contained" color="primary" className={classes.saveButton} onClick={handleSave}>
+        Save
+      </Button>
     </div>
   );
 };
