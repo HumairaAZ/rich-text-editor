@@ -21,6 +21,9 @@
   },
   "devDependencies": {
     "react-scripts": "4.0.3"
+    "gh-pages": "^3.2.3"
+}
+
   },
   "browserslist": {
     "production": [
