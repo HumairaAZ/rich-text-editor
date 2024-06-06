@@ -29,7 +29,7 @@ const Editor = () => {
   const [value, setValue] = useState([
     {
       type: 'paragraph',
-      children: [{ text: 'This is editable rich text, much better than a text area!' }],
+      children: [{ text: 'This is editable rich text, much better than a textarea!' }],
     },
   ]);
 
@@ -65,7 +65,6 @@ const Editor = () => {
           fontStyle: props.leaf.italic ? 'italic' : 'normal',
           textDecoration: props.leaf.underlined ? 'underline' : 'none',
           textDecorationLine: props.leaf.strikethrough ? 'line-through' : 'none',
-          color: props.leaf.color ? props.leaf.color : 'inherit',
         }}
       >
         {props.children}
