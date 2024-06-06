@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Editor from './components/Editor';
-import { AppBar, Toolbar, Typography, Container, CssBaseline } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Container, CssBaseline, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -14,6 +14,18 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     marginTop: theme.spacing(4),
+  },
+  paper: {
+    padding: theme.spacing(3),
+    marginTop: theme.spacing(2),
+    borderRadius: theme.shape.borderRadius,
+    boxShadow: theme.shadows[3],
+  },
+  footer: {
+    marginTop: theme.spacing(4),
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    backgroundColor: theme.palette.background.paper,
   },
 }));
 
@@ -31,8 +43,13 @@ function App() {
         </Toolbar>
       </AppBar>
       <Container className={classes.container}>
-        <Editor />
+        <Paper className={classes.paper}>
+          <Editor />
+        </Paper>
       </Container>
+      <footer className={classes.footer}>
+        <Typography variant="body1">© 2024 Your Name. All rights reserved.</Typography>
+      </footer>
     </div>
   );
 }
