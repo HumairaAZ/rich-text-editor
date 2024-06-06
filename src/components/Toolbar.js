@@ -1,98 +1,115 @@
 // src/components/Toolbar.js
 
-import React from 'react';
-import { Button, ButtonGroup } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Button, ButtonGroup, Tooltip, Popover } from '@material-ui/core';
 import { FormatBold, FormatItalic, FormatUnderlined, StrikethroughS, FormatColorText, FormatAlignLeft, FormatAlignCenter, FormatAlignRight } from '@material-ui/icons';
-import { Editor, Transforms } from 'slate';
 import { SketchPicker } from 'react-color';
 
-const isMarkActive = (editor, format) => {
-  const marks = Editor.marks(editor);
-  return marks ? marks[format] === true : false;
-};
+const Toolbar = ({ editor }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [color, setColor] = useState('#000000');
 
-const toggleMark = (editor, format) => {
-  const isActive = isMarkActive(editor, format);
+  const handleColorClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-  if (isActive) {
-    Editor.removeMark(editor, format);
-  } else {
-    Editor.addMark(editor, format, true);
-  }
-};
+  const handleColorClose = () => {
+    setAnchorEl(null);
+  };
 
-const Toolbar = ({ editor, setColor }) => {
+  const handleColorChange = (color) => {
+    setColor(color.hex);
+    editor.addMark('color', color.hex);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'color-popover' : undefined;
+
   return (
     <div>
       <ButtonGroup variant="contained" color="primary" aria-label="outlined primary button group">
-        <Button onMouseDown={(event) => {
-          event.preventDefault();
-          toggleMark(editor, 'bold');
-        }}>
-          <FormatBold />
-        </Button>
-        <Button onMouseDown={(event) => {
-          event.preventDefault();
-          toggleMark(editor, 'italic');
-        }}>
-          <FormatItalic />
-        </Button>
-        <Button onMouseDown={(event) => {
-          event.preventDefault();
-          toggleMark(editor, 'underlined');
-        }}>
-          <FormatUnderlined />
-        </Button>
-        <Button onMouseDown={(event) => {
-          event.preventDefault();
-          toggleMark(editor, 'strikethrough');
-        }}>
-          <StrikethroughS />
-        </Button>
-        <Button onMouseDown={(event) => {
-          event.preventDefault();
-          toggleMark(editor, 'color');
-        }}>
-          <FormatColorText />
-        </Button>
+        <Tooltip title="Bold">
+          <Button onMouseDown={(event) => {
+            event.preventDefault();
+            editor.toggleMark('bold');
+          }}>
+            <FormatBold />
+          </Button>
+        </Tooltip>
+        <Tooltip title="Italic">
+          <Button onMouseDown={(event) => {
+            event.preventDefault();
+            editor.toggleMark('italic');
+          }}>
+            <FormatItalic />
+          </Button>
+        </Tooltip>
+        <Tooltip title="Underline">
+          <Button onMouseDown={(event) => {
+            event.preventDefault();
+            editor.toggleMark('underlined');
+          }}>
+            <FormatUnderlined />
+          </Button>
+        </Tooltip>
+        <Tooltip title="Strikethrough">
+          <Button onMouseDown={(event) => {
+            event.preventDefault();
+            editor.toggleMark('strikethrough');
+          }}>
+            <StrikethroughS />
+          </Button>
+        </Tooltip>
+        <Tooltip title="Text Color">
+          <Button onMouseDown={handleColorClick}>
+            <FormatColorText />
+          </Button>
+        </Tooltip>
       </ButtonGroup>
-      <SketchPicker
-        color="#000000"
-        onChangeComplete={(color) => {
-          setColor(color.hex);
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleColorClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
         }}
-      />
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      >
+        <SketchPicker
+          color={color}
+          onChangeComplete={handleColorChange}
+        />
+      </Popover>
       <ButtonGroup variant="contained" color="primary" aria-label="outlined primary button group" style={{ marginLeft: '10px' }}>
-        <Button onMouseDown={(event) => {
-          event.preventDefault();
-          Transforms.setNodes(
-            editor,
-            { align: 'left' },
-            { match: n => Editor.isBlock(editor, n) }
-          );
-        }}>
-          <FormatAlignLeft />
-        </Button>
-        <Button onMouseDown={(event) => {
-          event.preventDefault();
-          Transforms.setNodes(
-            editor,
-            { align: 'center' },
-            { match: n => Editor.isBlock(editor, n) }
-          );
-        }}>
-          <FormatAlignCenter />
-        </Button>
-        <Button onMouseDown={(event) => {
-          event.preventDefault();
-          Transforms.setNodes(
-            editor,
-            { align: 'right' },
-            { match: n => Editor.isBlock(editor, n) }
-          );
-        }}>
-          <FormatAlignRight />
-        </Button>
+        <Tooltip title="Align Left">
+          <Button onMouseDown={(event) => {
+            event.preventDefault();
+            editor.alignText('left');
+          }}>
+            <FormatAlignLeft />
+          </Button>
+        </Tooltip>
+        <Tooltip title="Align Center">
+          <Button onMouseDown={(event) => {
+            event.preventDefault();
+            editor.alignText('center');
+          }}>
+            <FormatAlignCenter />
+          </Button>
+        </Tooltip>
+        <Tooltip title="Align Right">
+          <Button onMouseDown={(event) => {
+            event.preventDefault();
+            editor.alignText('right');
+          }}>
+            <FormatAlignRight />
+          </Button>
+        </Tooltip>
       </ButtonGroup>
     </div>
   );
