@@ -2,7 +2,7 @@
 
 import React, { useCallback, useMemo, useState } from 'react';
 import { Slate, Editable, withReact } from 'slate-react';
-import { createEditor } from 'slate';
+import { createEditor, Transforms, Text } from 'slate';
 import { withHistory } from 'slate-history';
 import Toolbar from './Toolbar';
 import { makeStyles } from '@material-ui/core/styles';
@@ -35,12 +35,32 @@ const Editor = () => {
     }
   }, []);
 
+  const renderLeaf = useCallback((props) => {
+    return (
+      <span
+        {...props.attributes}
+        style={{
+          fontWeight: props.leaf.bold ? 'bold' : 'normal',
+          fontStyle: props.leaf.italic ? 'italic' : 'normal',
+          textDecoration: props.leaf.underlined ? 'underline' : 'none',
+          textDecorationLine: props.leaf.strikethrough ? 'line-through' : 'none',
+        }}
+      >
+        {props.children}
+      </span>
+    );
+  }, []);
+
   return (
     <div>
       <Toolbar editor={editor} />
       <div className={classes.editorContainer}>
         <Slate editor={editor} value={value} onChange={value => setValue(value)}>
-          <Editable renderElement={renderElement} placeholder="Enter some rich text..." />
+          <Editable
+            renderElement={renderElement}
+            renderLeaf={renderLeaf}
+            placeholder="Enter some rich text..."
+          />
         </Slate>
       </div>
     </div>
