@@ -96,7 +96,7 @@ const Editor = () => {
           <Editable
             renderElement={renderElement}
             renderLeaf={renderLeaf}
-            placeholder="Enter any text..."
+            placeholder="Enter some rich text..."
           />
         </Slate>
       </div>
