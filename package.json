@@ -4,6 +4,8 @@
   "description": "A content creation and editing tool with rich text editing features using Slate.js",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
