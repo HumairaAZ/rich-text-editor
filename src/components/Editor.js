@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.shape.borderRadius,
     boxShadow: theme.shadows[1],
   },
+  wordCount: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
 const Editor = () => {
@@ -78,6 +81,12 @@ const Editor = () => {
     }
   };
 
+  const wordCount = value.reduce((acc, node) => {
+    return acc + node.children.reduce((innerAcc, n) => {
+      return innerAcc + (n.text.match(/\w+/g) || []).length;
+    }, 0);
+  }, 0);
+
   return (
     <div>
       <Toolbar editor={editor} setColor={setColor} />
@@ -89,6 +98,9 @@ const Editor = () => {
             placeholder="Enter some rich text..."
           />
         </Slate>
+      </div>
+      <div className={classes.wordCount}>
+        Word Count: {wordCount}
       </div>
     </div>
   );
