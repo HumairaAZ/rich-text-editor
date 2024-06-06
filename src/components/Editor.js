@@ -32,7 +32,6 @@ const Editor = () => {
       children: [{ text: 'This is editable rich text, much better than a textarea!' }],
     },
   ]);
-  const [color, setColor] = useState('#000000');
 
   useEffect(() => {
     const savedData = localStorage.getItem('content');
@@ -76,20 +75,6 @@ const Editor = () => {
 
   const handleChange = (newValue) => {
     setValue(newValue);
-    const { selection } = editor;
-    if (selection) {
-      const [match] = Editor.nodes(editor, {
-        match: n => n.type === 'paragraph',
-      });
-
-      if (match) {
-        Transforms.setNodes(
-          editor,
-          { color: color },
-          { match: n => Text.isText(n), split: true }
-        );
-      }
-    }
   };
 
   const handleSave = () => {
@@ -103,9 +88,42 @@ const Editor = () => {
     }, 0);
   }, 0);
 
+  editor.toggleMark = (format) => {
+    const isActive = Text.isText(format);
+    if (isActive) {
+      Transforms.setNodes(
+        editor,
+        { [format]: false },
+        { match: n => Text.isText(n), split: true }
+      );
+    } else {
+      Transforms.setNodes(
+        editor,
+        { [format]: true },
+        { match: n => Text.isText(n), split: true }
+      );
+    }
+  };
+
+  editor.addMark = (format, value) => {
+    Transforms.setNodes(
+      editor,
+      { [format]: value },
+      { match: n => Text.isText(n), split: true }
+    );
+  };
+
+  editor.alignText = (align) => {
+    Transforms.setNodes(
+      editor,
+      { align: align },
+      { match: n => Editor.isBlock(editor, n) }
+    );
+  };
+
   return (
     <div>
-      <Toolbar editor={editor} setColor={setColor} />
+      <Toolbar editor={editor} />
       <div className={classes.editorContainer}>
         <Slate editor={editor} value={value} onChange={handleChange}>
           <Editable
