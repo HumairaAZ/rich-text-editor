@@ -1,26 +1,26 @@
 // src/components/Toolbar.js
 
 import React, { useState } from 'react';
-import { Button, ButtonGroup, Tooltip, Popover, IconButton, makeStyles } from '@material-ui/core';
+import { Button, ButtonGroup, Tooltip, Popover } from '@material-ui/core';
 import { FormatBold, FormatItalic, FormatUnderlined, StrikethroughS, FormatColorText, FormatAlignLeft, FormatAlignCenter, FormatAlignRight } from '@material-ui/icons';
 import { SketchPicker } from 'react-color';
+import { Editor, Transforms, Text } from 'slate';
 
-const useStyles = makeStyles((theme) => ({
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: theme.spacing(2),
-  },
-  popover: {
-    padding: theme.spacing(2),
-  },
-  colorButton: {
-    marginLeft: theme.spacing(1),
-  },
-}));
+const isMarkActive = (editor, format) => {
+  const marks = Editor.marks(editor);
+  return marks ? marks[format] === true : false;
+};
+
+const toggleMark = (editor, format) => {
+  const isActive = isMarkActive(editor, format);
+  if (isActive) {
+    Editor.removeMark(editor, format);
+  } else {
+    Editor.addMark(editor, format, true);
+  }
+};
 
 const Toolbar = ({ editor }) => {
-  const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [color, setColor] = useState('#000000');
 
@@ -34,28 +34,18 @@ const Toolbar = ({ editor }) => {
 
   const handleColorChange = (color) => {
     setColor(color.hex);
-    editor.addMark('color', color.hex);
+    Transforms.setNodes(
+      editor,
+      { color: color.hex },
+      { match: n => Text.isText(n), split: true }
+    );
   };
 
   const open = Boolean(anchorEl);
   const id = open ? 'color-popover' : undefined;
 
-  const isMarkActive = (editor, format) => {
-    const marks = editor.marks(editor);
-    return marks ? marks[format] === true : false;
-  };
-
-  const toggleMark = (editor, format) => {
-    const isActive = isMarkActive(editor, format);
-    if (isActive) {
-      editor.removeMark(format);
-    } else {
-      editor.addMark(format, true);
-    }
-  };
-
   return (
-    <div className={classes.toolbar}>
+    <div>
       <ButtonGroup variant="contained" color="primary" aria-label="outlined primary button group">
         <Tooltip title="Bold">
           <Button onMouseDown={(event) => {
@@ -112,14 +102,17 @@ const Toolbar = ({ editor }) => {
         <SketchPicker
           color={color}
           onChangeComplete={handleColorChange}
-          className={classes.popover}
         />
       </Popover>
       <ButtonGroup variant="contained" color="primary" aria-label="outlined primary button group" style={{ marginLeft: '10px' }}>
         <Tooltip title="Align Left">
           <Button onMouseDown={(event) => {
             event.preventDefault();
-            editor.alignText('left');
+            Transforms.setNodes(
+              editor,
+              { align: 'left' },
+              { match: n => Editor.isBlock(editor, n) }
+            );
           }}>
             <FormatAlignLeft />
           </Button>
@@ -127,7 +120,11 @@ const Toolbar = ({ editor }) => {
         <Tooltip title="Align Center">
           <Button onMouseDown={(event) => {
             event.preventDefault();
-            editor.alignText('center');
+            Transforms.setNodes(
+              editor,
+              { align: 'center' },
+              { match: n => Editor.isBlock(editor, n) }
+            );
           }}>
             <FormatAlignCenter />
           </Button>
@@ -135,7 +132,11 @@ const Toolbar = ({ editor }) => {
         <Tooltip title="Align Right">
           <Button onMouseDown={(event) => {
             event.preventDefault();
-            editor.alignText('right');
+            Transforms.setNodes(
+              editor,
+              { align: 'right' },
+              { match: n => Editor.isBlock(editor, n) }
+            );
           }}>
             <FormatAlignRight />
           </Button>
