@@ -39,6 +39,7 @@ const Toolbar = ({ editor }) => {
       { color: color.hex },
       { match: n => Text.isText(n), split: true }
     );
+    Editor.addMark(editor, 'color', color.hex);
   };
 
   const open = Boolean(anchorEl);
