@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/rich-text-editor/static/css/main.4ce23753.chunk.css",
-    "main.js": "/rich-text-editor/static/js/main.1524ca93.chunk.js",
-    "main.js.map": "/rich-text-editor/static/js/main.1524ca93.chunk.js.map",
+    "main.js": "/rich-text-editor/static/js/main.2d210183.chunk.js",
+    "main.js.map": "/rich-text-editor/static/js/main.2d210183.chunk.js.map",
     "runtime-main.js": "/rich-text-editor/static/js/runtime-main.37148d26.js",
     "runtime-main.js.map": "/rich-text-editor/static/js/runtime-main.37148d26.js.map",
     "static/css/2.504d9bc7.chunk.css": "/rich-text-editor/static/css/2.504d9bc7.chunk.css",
@@ -18,6 +18,6 @@
     "static/css/2.504d9bc7.chunk.css",
     "static/js/2.af3ce031.chunk.js",
     "static/css/main.4ce23753.chunk.css",
-    "static/js/main.1524ca93.chunk.js"
+    "static/js/main.2d210183.chunk.js"
   ]
 }
