@@ -107,7 +107,4 @@ Contributions are welcome! Please feel free to submit a pull request or open an 
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgements
 
-- Thanks to the open-source community for the amazing libraries and tools used in this project.
-- Special thanks to the Slate.js and Material-UI teams for their exceptional work.
