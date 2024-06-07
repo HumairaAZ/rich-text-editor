@@ -4,6 +4,7 @@ import 'draft-js/dist/Draft.css';
 import RichTextEditorToolbar from './RichTextEditorToolbar';
 import { Container, Paper } from '@mui/material';
 import { styled } from '@mui/system';
+import { debounce } from 'lodash';
 
 const StyledPaper = styled(Paper)({
   padding: '16px',
@@ -19,6 +20,10 @@ const StyledPaper = styled(Paper)({
 
 const blockRenderMap = DefaultDraftBlockRenderMap;
 
+const saveContent = debounce((content) => {
+  localStorage.setItem('content', JSON.stringify(content));
+}, 1000);
+
 const RichTextEditor = () => {
   const [editorState, setEditorState] = useState(() => {
     const savedContent = localStorage.getItem('content');
@@ -27,7 +32,7 @@ const RichTextEditor = () => {
 
   useEffect(() => {
     const contentState = editorState.getCurrentContent();
-    localStorage.setItem('content', JSON.stringify(convertToRaw(contentState)));
+    saveContent(convertToRaw(contentState));
   }, [editorState]);
 
   const handleKeyCommand = (command) => {
