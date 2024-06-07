@@ -15,7 +15,8 @@
     "tailwindcss": "^2.2.19",
     "@mui/material": "^5.4.3",
   "@emotion/react": "^11.7.1",
-  "@emotion/styled": "^11.6.0"
+  "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.4.2"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.18.6"
