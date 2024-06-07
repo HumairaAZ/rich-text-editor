@@ -1,9 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css';
 
 .editor-container {
-  @apply p-4 border border-gray-300 rounded mt-4 bg-white;
+  @apply p-4 border border-gray-300 rounded mt-4 bg-blue;
   min-height: 200px;
   cursor: text;
 }
