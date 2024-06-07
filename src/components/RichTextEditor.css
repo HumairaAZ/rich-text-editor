@@ -5,7 +5,3 @@
 .editor-container {
   @apply p-4 border border-gray-300 rounded mt-4;
 }
-
-.editor-toolbar {
-  @apply bg-gray-100 border-b border-gray-300;
-}
