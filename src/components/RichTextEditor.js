@@ -1,19 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Editor, EditorState, RichUtils, AtomicBlockUtils, convertToRaw, convertFromRaw } from 'draft-js';
+import React, { useState } from 'react';
+import { Editor, EditorState, RichUtils, AtomicBlockUtils } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import RichTextEditorToolbar from './RichTextEditorToolbar';
 import './RichTextEditor.css';
 
 const RichTextEditor = () => {
-  const [editorState, setEditorState] = useState(() => {
-    const savedContent = localStorage.getItem('content');
-    return savedContent ? EditorState.createWithContent(convertFromRaw(JSON.parse(savedContent))) : EditorState.createEmpty();
-  });
-
-  useEffect(() => {
-    const contentState = editorState.getCurrentContent();
-    localStorage.setItem('content', JSON.stringify(convertToRaw(contentState)));
-  }, [editorState]);
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const handleKeyCommand = (command) => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
