@@ -1,0 +1,2 @@
+@tailwind base;@tailwind components;@tailwind utilities;.editor-container{@apply p-4 border border-gray-300 rounded mt-4 bg-white;min-height:200px;cursor:text}.editor-container .public-DraftStyleDefault-pre{background-color:#f5f5f5;padding:8px;border-radius:4px;overflow-x:auto}
+/*# sourceMappingURL=main.fed22c57.chunk.css.map */
