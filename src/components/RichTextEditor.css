@@ -7,3 +7,10 @@
   min-height: 200px;
   cursor: text;
 }
+
+.editor-container .public-DraftStyleDefault-pre {
+  background-color: #f5f5f5;
+  padding: 8px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
