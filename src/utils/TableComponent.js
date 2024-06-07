@@ -5,7 +5,7 @@ const TableComponent = ({ block, contentState }) => {
   const rows = table.split('\n').map(row => row.split('|').slice(1, -1));
 
   return (
-    <table style={{ border: '1px solid black', borderCollapse: 'collapse' }}>
+    <table style={{ border: '1px solid black', borderCollapse: 'collapse', width: '100%' }}>
       <tbody>
         {rows.map((row, rowIndex) => (
           <tr key={rowIndex}>
