@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Editor, EditorState, RichUtils, AtomicBlockUtils, convertToRaw, convertFromRaw, ContentState } from 'draft-js';
+import { Editor, EditorState, RichUtils, AtomicBlockUtils, convertToRaw, convertFromRaw } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import RichTextEditorToolbar from './RichTextEditorToolbar';
 import './RichTextEditor.css';
