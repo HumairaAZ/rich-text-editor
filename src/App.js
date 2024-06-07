@@ -1,7 +1,7 @@
 // src/App.js
 
 import React from 'react';
-import Editor from './components/Editor';
+import Editor from './components/RichTextEditorToolbar';
 import { AppBar, Toolbar, Typography, Container, CssBaseline, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
