@@ -15,7 +15,7 @@ const RichTextEditor = () => {
     localStorage.setItem('content', JSON.stringify(convertToRaw(contentState)));
   }, [editorState]);
 
-  const handleKeyCommand = (command, editorState) => {
+  const handleKeyCommand = (command) => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
       setEditorState(newState);
@@ -59,7 +59,7 @@ const RichTextEditor = () => {
         onCode={onCodeClick}
         onTable={onTableClick}
       />
-      <div className="editor-container">
+      <div className="editor-container" onClick={() => setEditorState(EditorState.moveFocusToEnd(editorState))}>
         <Editor
           editorState={editorState}
           handleKeyCommand={handleKeyCommand}
