@@ -85,11 +85,9 @@ const RichTextEditor = () => {
     }
   };
 
-  // Undo/Redo Functions
   const undo = () => setEditorState(EditorState.undo(editorState));
   const redo = () => setEditorState(EditorState.redo(editorState));
 
-  // Alignment and Font Size Functions
   const toggleBlockType = (blockType) => {
     setEditorState(RichUtils.toggleBlockType(editorState, blockType));
   };
