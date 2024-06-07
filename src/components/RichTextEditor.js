@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Editor, EditorState, RichUtils, DefaultDraftBlockRenderMap } from 'draft-js';
+import React, { useState, useEffect } from 'react';
+import { Editor, EditorState, RichUtils, DefaultDraftBlockRenderMap, convertToRaw, convertFromRaw } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import RichTextEditorToolbar from './RichTextEditorToolbar';
 import './RichTextEditor.css';
@@ -7,7 +7,15 @@ import './RichTextEditor.css';
 const blockRenderMap = DefaultDraftBlockRenderMap;
 
 const RichTextEditor = () => {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [editorState, setEditorState] = useState(() => {
+    const savedContent = localStorage.getItem('content');
+    return savedContent ? EditorState.createWithContent(convertFromRaw(JSON.parse(savedContent))) : EditorState.createEmpty();
+  });
+
+  useEffect(() => {
+    const contentState = editorState.getCurrentContent();
+    localStorage.setItem('content', JSON.stringify(convertToRaw(contentState)));
+  }, [editorState]);
 
   const handleKeyCommand = (command) => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
@@ -25,11 +33,18 @@ const RichTextEditor = () => {
   const onBoldClick = () => toggleInlineStyle('BOLD');
   const onItalicClick = () => toggleInlineStyle('ITALIC');
   const onUnderlineClick = () => toggleInlineStyle('UNDERLINE');
+  const onStrikethroughClick = () => toggleInlineStyle('STRIKETHROUGH');
+  const onHighlightClick = () => toggleInlineStyle('HIGHLIGHT');
+  const onBulletListClick = () => toggleBlockType('unordered-list-item');
+  const onNumberListClick = () => toggleBlockType('ordered-list-item');
   const onCodeClick = () => toggleInlineStyle('CODE');
 
-  // Undo/Redo Functions
   const undo = () => setEditorState(EditorState.undo(editorState));
   const redo = () => setEditorState(EditorState.redo(editorState));
+
+  const toggleBlockType = (blockType) => {
+    setEditorState(RichUtils.toggleBlockType(editorState, blockType));
+  };
 
   return (
     <div className="p-4 max-w-2xl mx-auto bg-white rounded shadow-lg">
@@ -37,6 +52,10 @@ const RichTextEditor = () => {
         onBold={onBoldClick}
         onItalic={onItalicClick}
         onUnderline={onUnderlineClick}
+        onStrikethrough={onStrikethroughClick}
+        onHighlight={onHighlightClick}
+        onBulletList={onBulletListClick}
+        onNumberList={onNumberListClick}
         onCode={onCodeClick}
         onUndo={undo}
         onRedo={redo}
