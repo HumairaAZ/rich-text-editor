@@ -32,7 +32,7 @@ const RichTextEditor = () => {
   const redo = () => setEditorState(EditorState.redo(editorState));
 
   return (
-    <div>
+    <div className="p-4 max-w-2xl mx-auto bg-white rounded shadow-lg">
       <RichTextEditorToolbar
         onBold={onBoldClick}
         onItalic={onItalicClick}
@@ -41,7 +41,7 @@ const RichTextEditor = () => {
         onUndo={undo}
         onRedo={redo}
       />
-      <div className="editor-container" onClick={() => setEditorState(EditorState.moveFocusToEnd(editorState))}>
+      <div className="editor-container mt-4 p-4 border border-gray-300 rounded bg-white min-h-[200px] cursor-text focus:outline-none transition duration-300 ease-in-out transform hover:shadow-lg hover:border-gray-400" onClick={() => setEditorState(EditorState.moveFocusToEnd(editorState))}>
         <Editor
           editorState={editorState}
           handleKeyCommand={handleKeyCommand}
