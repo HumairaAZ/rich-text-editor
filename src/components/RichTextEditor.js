@@ -24,9 +24,14 @@ const RichTextEditor = () => {
     return 'not-handled';
   };
 
-  const onBoldClick = () => setEditorState(RichUtils.toggleInlineStyle(editorState, 'BOLD'));
-  const onItalicClick = () => setEditorState(RichUtils.toggleInlineStyle(editorState, 'ITALIC'));
-  const onUnderlineClick = () => setEditorState(RichUtils.toggleInlineStyle(editorState, 'UNDERLINE'));
+  const toggleInlineStyle = (style) => {
+    setEditorState(RichUtils.toggleInlineStyle(editorState, style));
+  };
+
+  const onBoldClick = () => toggleInlineStyle('BOLD');
+  const onItalicClick = () => toggleInlineStyle('ITALIC');
+  const onUnderlineClick = () => toggleInlineStyle('UNDERLINE');
+
   const onImageClick = () => {
     const url = prompt('Enter image URL');
     if (url) {
@@ -36,7 +41,9 @@ const RichTextEditor = () => {
       setEditorState(AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' '));
     }
   };
-  const onCodeClick = () => setEditorState(RichUtils.toggleCode(editorState));
+
+  const onCodeClick = () => toggleInlineStyle('CODE');
+
   const onTableClick = () => {
     const rows = prompt('Enter number of rows');
     const columns = prompt('Enter number of columns');
