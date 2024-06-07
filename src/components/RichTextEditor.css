@@ -4,16 +4,19 @@
 @import 'https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css';
 
 .editor-container {
-  @apply p-4 border border-gray-300 rounded mt-4 bg-blue;
-  min-height: 200px;
-  cursor: text;
+  @apply p-4 border border-gray-300 rounded mt-4 bg-white min-h-[200px] cursor-text;
 }
-.public-DraftEditor-content span[data-offset-key] {
-  @apply bg-yellow-300;
-}
-.editor-container .public-DraftStyleDefault-pre {
-  background-color: #f5f5f5;
-  padding: 8px;
-  border-radius: 4px;
-  overflow-x: auto;
+
+@media (max-width: 768px) {
+  .editor-container {
+    @apply p-2;
+  }
+
+  .MuiAppBar-root {
+    @apply flex-wrap;
+  }
+
+  .MuiIconButton-root {
+    @apply m-1;
+  }
 }
