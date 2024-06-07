@@ -23,9 +23,7 @@ const RichTextEditorToolbar = ({ onBold, onItalic, onUnderline, onStrikethrough,
       </IconButton>
       <IconButton color="inherit" onClick={onNumberList} aria-label="Number List" className="hover:bg-gray-700 transition duration-300 ease-in-out transform hover:scale-110">
         <FormatListNumbered />
-      </IconButton>
-      <IconButton color="inherit" onClick={onCode} aria-label="Code" className="hover:bg-gray-700 transition duration-300 ease-in-out transform hover:scale-110">
-        <Code />
+    
       </IconButton>
       <IconButton color="inherit" onClick={onUndo} aria-label="Undo" className="hover:bg-gray-700 transition duration-300 ease-in-out transform hover:scale-110">
         <Undo />
