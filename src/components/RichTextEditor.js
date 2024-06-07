@@ -36,7 +36,6 @@ const RichTextEditor = () => {
   const onStrikethroughClick = () => toggleInlineStyle('STRIKETHROUGH');
   const onBulletListClick = () => toggleBlockType('unordered-list-item');
   const onNumberListClick = () => toggleBlockType('ordered-list-item');
-  const onCodeClick = () => toggleInlineStyle('CODE');
 
   const undo = () => setEditorState(EditorState.undo(editorState));
   const redo = () => setEditorState(EditorState.redo(editorState));
@@ -54,7 +53,6 @@ const RichTextEditor = () => {
         onStrikethrough={onStrikethroughClick}
         onBulletList={onBulletListClick}
         onNumberList={onNumberListClick}
-        onCode={onCodeClick}
         onUndo={undo}
         onRedo={redo}
       />
