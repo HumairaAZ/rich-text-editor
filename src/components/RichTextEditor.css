@@ -8,7 +8,9 @@
   min-height: 200px;
   cursor: text;
 }
-
+.public-DraftEditor-content span[data-offset-key] {
+  @apply bg-yellow-300;
+}
 .editor-container .public-DraftStyleDefault-pre {
   background-color: #f5f5f5;
   padding: 8px;
