@@ -62,6 +62,7 @@ const RichTextEditor = () => {
         <Editor
           editorState={editorState}
           handleKeyCommand={handleKeyCommand}
+          placeholder="Start typing..."
           onChange={setEditorState}
         />
       </div>
