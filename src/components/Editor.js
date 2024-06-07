@@ -1,112 +1,70 @@
-// src/components/Editor.js
+import React, { useState } from 'react';
+import { Editor, EditorState, RichUtils, AtomicBlockUtils } from 'draft-js';
+import 'draft-js/dist/Draft.css';
+import RichTextEditorToolbar from './RichTextEditorToolbar';
 
-import React, { useCallback, useMemo, useState, useEffect } from 'react';
-import { Slate, Editable, withReact } from 'slate-react';
-import { createEditor, Transforms, Text } from 'slate';
-import { withHistory } from 'slate-history';
-import Toolbar from './Toolbar';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+const RichTextEditor = () => {
+  const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
 
-const useStyles = makeStyles((theme) => ({
-  editorContainer: {
-    padding: theme.spacing(2),
-    backgroundColor: '#fff',
-    borderRadius: theme.shape.borderRadius,
-    boxShadow: theme.shadows[1],
-  },
-  wordCount: {
-    marginTop: theme.spacing(2),
-  },
-  saveButton: {
-    marginTop: theme.spacing(2),
-  },
-}));
-
-const Editor = () => {
-  const classes = useStyles();
-  const editor = useMemo(() => withHistory(withReact(createEditor())), []);
-  const [value, setValue] = useState([
-    {
-      type: 'paragraph',
-      children: [{ text: 'This is editable rich text, much better than a textarea!' }],
-    },
-  ]);
-
-  useEffect(() => {
-    const savedData = localStorage.getItem('content');
-    if (savedData) {
-      setValue(JSON.parse(savedData));
+  const handleKeyCommand = (command, editorState) => {
+    const newState = RichUtils.handleKeyCommand(editorState, command);
+    if (newState) {
+      setEditorState(newState);
+      return 'handled';
     }
-  }, []);
-
-  const renderElement = useCallback((props) => {
-    switch (props.element.type) {
-      case 'paragraph':
-        return (
-          <p
-            {...props.attributes}
-            style={{ textAlign: props.element.align }}
-          >
-            {props.children}
-          </p>
-        );
-      default:
-        return <p {...props.attributes}>{props.children}</p>;
-    }
-  }, []);
-
-  const renderLeaf = useCallback((props) => {
-    return (
-      <span
-        {...props.attributes}
-        style={{
-          fontWeight: props.leaf.bold ? 'bold' : 'normal',
-          fontStyle: props.leaf.italic ? 'italic' : 'normal',
-          textDecoration: props.leaf.underlined ? 'underline' : 'none',
-          textDecorationLine: props.leaf.strikethrough ? 'line-through' : 'none',
-        }}
-      >
-        {props.children}
-      </span>
-    );
-  }, []);
-
-  const handleChange = (newValue) => {
-    setValue(newValue);
+    return 'not-handled';
   };
 
-  const handleSave = () => {
-    localStorage.setItem('content', JSON.stringify(value));
-    alert('Content saved!');
+  const onBoldClick = () => {
+    setEditorState(RichUtils.toggleInlineStyle(editorState, 'BOLD'));
   };
 
-  const wordCount = value.reduce((acc, node) => {
-    return acc + node.children.reduce((innerAcc, n) => {
-      return innerAcc + (n.text.match(/\w+/g) || []).length;
-    }, 0);
-  }, 0);
+  const onItalicClick = () => {
+    setEditorState(RichUtils.toggleInlineStyle(editorState, 'ITALIC'));
+  };
+
+  const onUnderlineClick = () => {
+    setEditorState(RichUtils.toggleInlineStyle(editorState, 'UNDERLINE'));
+  };
+
+  const onImageClick = () => {
+    const url = prompt('Enter image URL');
+    if (url) {
+      const contentState = editorState.getCurrentContent();
+      const contentStateWithEntity = contentState.createEntity('IMAGE', 'IMMUTABLE', { src: url });
+      const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+      const newEditorState = AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' ');
+      setEditorState(newEditorState);
+    }
+  };
+
+  const onCodeClick = () => {
+    setEditorState(RichUtils.toggleCode(editorState));
+  };
+
+  const onTableClick = () => {
+    // Implement table insertion logic
+  };
 
   return (
     <div>
-      <Toolbar editor={editor} />
-      <div className={classes.editorContainer}>
-        <Slate editor={editor} value={value} onChange={handleChange}>
-          <Editable
-            renderElement={renderElement}
-            renderLeaf={renderLeaf}
-            placeholder="Enter some rich text..."
-          />
-        </Slate>
+      <RichTextEditorToolbar
+        onBold={onBoldClick}
+        onItalic={onItalicClick}
+        onUnderline={onUnderlineClick}
+        onImage={onImageClick}
+        onCode={onCodeClick}
+        onTable={onTableClick}
+      />
+      <div style={{ padding: '20px', border: '1px solid #ccc', marginTop: '10px' }}>
+        <Editor
+          editorState={editorState}
+          handleKeyCommand={handleKeyCommand}
+          onChange={setEditorState}
+        />
       </div>
-      <div className={classes.wordCount}>
-        Word Count: {wordCount}
-      </div>
-      <Button variant="contained" color="primary" className={classes.saveButton} onClick={handleSave}>
-        Save
-      </Button>
     </div>
   );
 };
 
-export default Editor;
+export default RichTextEditor;
