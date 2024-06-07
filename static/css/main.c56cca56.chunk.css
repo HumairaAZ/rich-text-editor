@@ -1,0 +1,2 @@
+@tailwind base;@tailwind components;@tailwind utilities;.editor-container{@apply p-4 border border-gray-300 rounded mt-4 bg-white;min-height:200px;cursor:text}
+/*# sourceMappingURL=main.c56cca56.chunk.css.map */

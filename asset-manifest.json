@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/rich-text-editor/static/css/main.fce8780f.chunk.css",
+    "main.css": "/rich-text-editor/static/css/main.c56cca56.chunk.css",
     "main.js": "/rich-text-editor/static/js/main.99c6304f.chunk.js",
     "main.js.map": "/rich-text-editor/static/js/main.99c6304f.chunk.js.map",
     "runtime-main.js": "/rich-text-editor/static/js/runtime-main.37148d26.js",
@@ -10,14 +10,14 @@
     "static/js/2.516fc3d9.chunk.js.map": "/rich-text-editor/static/js/2.516fc3d9.chunk.js.map",
     "index.html": "/rich-text-editor/index.html",
     "static/css/2.504d9bc7.chunk.css.map": "/rich-text-editor/static/css/2.504d9bc7.chunk.css.map",
-    "static/css/main.fce8780f.chunk.css.map": "/rich-text-editor/static/css/main.fce8780f.chunk.css.map",
+    "static/css/main.c56cca56.chunk.css.map": "/rich-text-editor/static/css/main.c56cca56.chunk.css.map",
     "static/js/2.516fc3d9.chunk.js.LICENSE.txt": "/rich-text-editor/static/js/2.516fc3d9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.37148d26.js",
     "static/css/2.504d9bc7.chunk.css",
     "static/js/2.516fc3d9.chunk.js",
-    "static/css/main.fce8780f.chunk.css",
+    "static/css/main.c56cca56.chunk.css",
     "static/js/main.99c6304f.chunk.js"
   ]
 }
