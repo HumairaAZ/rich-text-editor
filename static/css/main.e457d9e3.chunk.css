@@ -1,2 +1,0 @@
-@import url(https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css);@tailwind base;@tailwind components;@tailwind utilities;.editor-container{@apply p-4 border border-gray-300 rounded mt-4 bg-white min-h-[200px] cursor-text}@media (max-width:768px){.editor-container{@apply p-2}.MuiAppBar-root{@apply flex-wrap}.MuiIconButton-root{@apply m-1}}
-/*# sourceMappingURL=main.e457d9e3.chunk.css.map */
