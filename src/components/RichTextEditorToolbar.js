@@ -1,8 +1,8 @@
 import React from 'react';
 import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
-import { FormatBold, FormatItalic, FormatUnderlined, FormatStrikethrough, FormatListBulleted, FormatListNumbered, Code, Undo, Redo } from '@material-ui/icons';
+import { FormatBold, FormatItalic, FormatUnderlined, FormatStrikethrough, FormatListBulleted, FormatListNumbered, Undo, Redo } from '@material-ui/icons';
 
-const RichTextEditorToolbar = ({ onBold, onItalic, onUnderline, onStrikethrough, onBulletList, onNumberList, onCode, onUndo, onRedo }) => (
+const RichTextEditorToolbar = ({ onBold, onItalic, onUnderline, onStrikethrough, onBulletList, onNumberList, onUndo, onRedo }) => (
   <AppBar position="static" className="bg-gray-800">
     <Toolbar>
       <Typography variant="h6" className="text-white">Rich Text Editor</Typography>
@@ -23,7 +23,6 @@ const RichTextEditorToolbar = ({ onBold, onItalic, onUnderline, onStrikethrough,
       </IconButton>
       <IconButton color="inherit" onClick={onNumberList} aria-label="Number List" className="hover:bg-gray-700 transition duration-300 ease-in-out transform hover:scale-110">
         <FormatListNumbered />
-    
       </IconButton>
       <IconButton color="inherit" onClick={onUndo} aria-label="Undo" className="hover:bg-gray-700 transition duration-300 ease-in-out transform hover:scale-110">
         <Undo />
