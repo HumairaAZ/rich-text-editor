@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/components/RichTextEditor.css"],"names":[],"mappings":"AAAA,cAAc,CACd,oBAAoB,CACpB,mBAAmB,CAEnB,kBACE,8CAA8C,CAC9C,gBACF","file":"main.fce8780f.chunk.css","sourcesContent":["@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n.editor-container {\n  @apply p-4 border border-gray-300 rounded mt-4;\n  min-height: 200px;\n}\n"]}
