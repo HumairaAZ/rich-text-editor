@@ -1,32 +1,10 @@
 import React, { useState } from 'react';
-import { Editor, EditorState, RichUtils, AtomicBlockUtils, DefaultDraftBlockRenderMap } from 'draft-js';
+import { Editor, EditorState, RichUtils, DefaultDraftBlockRenderMap } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import RichTextEditorToolbar from './RichTextEditorToolbar';
-import ImageComponent from '../utils/ImageComponent';
-import { Map } from 'immutable';
 import './RichTextEditor.css';
 
-const blockRenderMap = Map({
-  'atomic': {
-    element: 'div',
-    wrapper: <div />,
-  },
-});
-
-const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(blockRenderMap);
-
-const mediaBlockRenderer = (block) => {
-  if (block.getType() === 'atomic') {
-    const type = block.getData().get('type');
-    if (type === 'image') {
-      return {
-        component: ImageComponent,
-        editable: false,
-      };
-    }
-  }
-  return null;
-};
+const blockRenderMap = DefaultDraftBlockRenderMap;
 
 const RichTextEditor = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -47,17 +25,6 @@ const RichTextEditor = () => {
   const onBoldClick = () => toggleInlineStyle('BOLD');
   const onItalicClick = () => toggleInlineStyle('ITALIC');
   const onUnderlineClick = () => toggleInlineStyle('UNDERLINE');
-
-  const onImageClick = () => {
-    const url = prompt('Enter image URL');
-    if (url) {
-      const contentState = editorState.getCurrentContent();
-      const contentStateWithEntity = contentState.createEntity('IMAGE', 'IMMUTABLE', { src: url });
-      const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-      setEditorState(AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' '));
-    }
-  };
-
   const onCodeClick = () => toggleInlineStyle('CODE');
 
   // Undo/Redo Functions
@@ -70,7 +37,6 @@ const RichTextEditor = () => {
         onBold={onBoldClick}
         onItalic={onItalicClick}
         onUnderline={onUnderlineClick}
-        onImage={onImageClick}
         onCode={onCodeClick}
         onUndo={undo}
         onRedo={redo}
@@ -79,8 +45,7 @@ const RichTextEditor = () => {
         <Editor
           editorState={editorState}
           handleKeyCommand={handleKeyCommand}
-          blockRenderMap={extendedBlockRenderMap}
-          blockRendererFn={mediaBlockRenderer}
+          blockRenderMap={blockRenderMap}
           placeholder="Start typing..."
           onChange={setEditorState}
         />
