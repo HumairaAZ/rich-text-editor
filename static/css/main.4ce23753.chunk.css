@@ -1,0 +1,2 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css);@tailwind base;@tailwind components;@tailwind utilities;.editor-container{@apply p-4 border border-gray-300 rounded mt-4 bg-blue;min-height:200px;cursor:text}.editor-container .public-DraftStyleDefault-pre{background-color:#f5f5f5;padding:8px;border-radius:4px;overflow-x:auto}
+/*# sourceMappingURL=main.4ce23753.chunk.css.map */
