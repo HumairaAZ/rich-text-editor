@@ -10,3 +10,4 @@ const ImageComponent = ({ block, contentState }) => {
 };
 
 export default ImageComponent;
+
