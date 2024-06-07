@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
-import { Editor, EditorState, RichUtils, AtomicBlockUtils } from 'draft-js';
+import React, { useState, useEffect } from 'react';
+import { Editor, EditorState, RichUtils, AtomicBlockUtils, convertToRaw, convertFromRaw } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import RichTextEditorToolbar from './RichTextEditorToolbar';
 
 const RichTextEditor = () => {
-  const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
+  const [editorState, setEditorState] = useState(() => {
+    const savedContent = localStorage.getItem('content');
+    return savedContent ? EditorState.createWithContent(convertFromRaw(JSON.parse(savedContent))) : EditorState.createEmpty();
+  });
+
+  useEffect(() => {
+    const contentState = editorState.getCurrentContent();
+    localStorage.setItem('content', JSON.stringify(convertToRaw(contentState)));
+  }, [editorState]);
 
   const handleKeyCommand = (command, editorState) => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
@@ -15,33 +23,19 @@ const RichTextEditor = () => {
     return 'not-handled';
   };
 
-  const onBoldClick = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, 'BOLD'));
-  };
-
-  const onItalicClick = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, 'ITALIC'));
-  };
-
-  const onUnderlineClick = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, 'UNDERLINE'));
-  };
-
+  const onBoldClick = () => setEditorState(RichUtils.toggleInlineStyle(editorState, 'BOLD'));
+  const onItalicClick = () => setEditorState(RichUtils.toggleInlineStyle(editorState, 'ITALIC'));
+  const onUnderlineClick = () => setEditorState(RichUtils.toggleInlineStyle(editorState, 'UNDERLINE'));
   const onImageClick = () => {
     const url = prompt('Enter image URL');
     if (url) {
       const contentState = editorState.getCurrentContent();
       const contentStateWithEntity = contentState.createEntity('IMAGE', 'IMMUTABLE', { src: url });
       const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-      const newEditorState = AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' ');
-      setEditorState(newEditorState);
+      setEditorState(AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' '));
     }
   };
-
-  const onCodeClick = () => {
-    setEditorState(RichUtils.toggleCode(editorState));
-  };
-
+  const onCodeClick = () => setEditorState(RichUtils.toggleCode(editorState));
   const onTableClick = () => {
     // Implement table insertion logic
   };
