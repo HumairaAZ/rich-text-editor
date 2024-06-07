@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/rich-text-editor/static/css/main.c56cca56.chunk.css",
-    "main.js": "/rich-text-editor/static/js/main.75d2c665.chunk.js",
-    "main.js.map": "/rich-text-editor/static/js/main.75d2c665.chunk.js.map",
+    "main.js": "/rich-text-editor/static/js/main.06a59b16.chunk.js",
+    "main.js.map": "/rich-text-editor/static/js/main.06a59b16.chunk.js.map",
     "runtime-main.js": "/rich-text-editor/static/js/runtime-main.37148d26.js",
     "runtime-main.js.map": "/rich-text-editor/static/js/runtime-main.37148d26.js.map",
     "static/css/2.504d9bc7.chunk.css": "/rich-text-editor/static/css/2.504d9bc7.chunk.css",
-    "static/js/2.606da2ee.chunk.js": "/rich-text-editor/static/js/2.606da2ee.chunk.js",
-    "static/js/2.606da2ee.chunk.js.map": "/rich-text-editor/static/js/2.606da2ee.chunk.js.map",
+    "static/js/2.105a088b.chunk.js": "/rich-text-editor/static/js/2.105a088b.chunk.js",
+    "static/js/2.105a088b.chunk.js.map": "/rich-text-editor/static/js/2.105a088b.chunk.js.map",
     "index.html": "/rich-text-editor/index.html",
     "static/css/2.504d9bc7.chunk.css.map": "/rich-text-editor/static/css/2.504d9bc7.chunk.css.map",
     "static/css/main.c56cca56.chunk.css.map": "/rich-text-editor/static/css/main.c56cca56.chunk.css.map",
-    "static/js/2.606da2ee.chunk.js.LICENSE.txt": "/rich-text-editor/static/js/2.606da2ee.chunk.js.LICENSE.txt"
+    "static/js/2.105a088b.chunk.js.LICENSE.txt": "/rich-text-editor/static/js/2.105a088b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.37148d26.js",
     "static/css/2.504d9bc7.chunk.css",
-    "static/js/2.606da2ee.chunk.js",
+    "static/js/2.105a088b.chunk.js",
     "static/css/main.c56cca56.chunk.css",
-    "static/js/main.75d2c665.chunk.js"
+    "static/js/main.06a59b16.chunk.js"
   ]
 }
