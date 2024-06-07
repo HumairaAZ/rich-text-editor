@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Editor, EditorState, RichUtils, AtomicBlockUtils, convertToRaw, convertFromRaw } from 'draft-js';
+import { Editor, EditorState, RichUtils, AtomicBlockUtils, convertToRaw, convertFromRaw, ContentState } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import RichTextEditorToolbar from './RichTextEditorToolbar';
+import './RichTextEditor.css';
 
 const RichTextEditor = () => {
   const [editorState, setEditorState] = useState(() => {
@@ -37,7 +38,15 @@ const RichTextEditor = () => {
   };
   const onCodeClick = () => setEditorState(RichUtils.toggleCode(editorState));
   const onTableClick = () => {
-    // Implement table insertion logic
+    const rows = prompt('Enter number of rows');
+    const columns = prompt('Enter number of columns');
+    if (rows && columns) {
+      const table = Array.from({ length: rows }, () => '| ' + '   | '.repeat(columns)).join('\n');
+      const contentState = editorState.getCurrentContent();
+      const contentStateWithEntity = contentState.createEntity('TABLE', 'IMMUTABLE', { table });
+      const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+      setEditorState(AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' '));
+    }
   };
 
   return (
