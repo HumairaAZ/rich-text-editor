@@ -2,7 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Editor, EditorState, RichUtils, DefaultDraftBlockRenderMap, convertToRaw, convertFromRaw } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import RichTextEditorToolbar from './RichTextEditorToolbar';
-import './RichTextEditor.css';
+import { Container, Paper } from '@mui/material';
+import { styled } from '@mui/system';
+
+const StyledPaper = styled(Paper)({
+  padding: '16px',
+  marginTop: '16px',
+  minHeight: '200px',
+  cursor: 'text',
+  transition: 'border 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+  '&:hover': {
+    border: '1px solid #3f51b5',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+  },
+});
 
 const blockRenderMap = DefaultDraftBlockRenderMap;
 
@@ -45,7 +58,7 @@ const RichTextEditor = () => {
   };
 
   return (
-    <div className="p-4 max-w-2xl mx-auto bg-white rounded shadow-lg">
+    <Container maxWidth="md">
       <RichTextEditorToolbar
         onBold={onBoldClick}
         onItalic={onItalicClick}
@@ -56,7 +69,7 @@ const RichTextEditor = () => {
         onUndo={undo}
         onRedo={redo}
       />
-      <div className="editor-container mt-4 p-4 border border-gray-300 rounded bg-white min-h-[200px] cursor-text focus:outline-none transition duration-300 ease-in-out transform hover:shadow-lg hover:border-gray-400" onClick={() => setEditorState(EditorState.moveFocusToEnd(editorState))}>
+      <StyledPaper onClick={() => setEditorState(EditorState.moveFocusToEnd(editorState))}>
         <Editor
           editorState={editorState}
           handleKeyCommand={handleKeyCommand}
@@ -64,8 +77,8 @@ const RichTextEditor = () => {
           placeholder="Start typing..."
           onChange={setEditorState}
         />
-      </div>
-    </div>
+      </StyledPaper>
+    </Container>
   );
 };
 
