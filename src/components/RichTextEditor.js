@@ -34,7 +34,6 @@ const RichTextEditor = () => {
   const onItalicClick = () => toggleInlineStyle('ITALIC');
   const onUnderlineClick = () => toggleInlineStyle('UNDERLINE');
   const onStrikethroughClick = () => toggleInlineStyle('STRIKETHROUGH');
-  const onHighlightClick = () => toggleInlineStyle('HIGHLIGHT');
   const onBulletListClick = () => toggleBlockType('unordered-list-item');
   const onNumberListClick = () => toggleBlockType('ordered-list-item');
   const onCodeClick = () => toggleInlineStyle('CODE');
@@ -53,7 +52,6 @@ const RichTextEditor = () => {
         onItalic={onItalicClick}
         onUnderline={onUnderlineClick}
         onStrikethrough={onStrikethroughClick}
-        onHighlight={onHighlightClick}
         onBulletList={onBulletListClick}
         onNumberList={onNumberListClick}
         onCode={onCodeClick}
