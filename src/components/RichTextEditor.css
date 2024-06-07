@@ -4,4 +4,5 @@
 
 .editor-container {
   @apply p-4 border border-gray-300 rounded mt-4;
+  min-height: 200px;
 }
