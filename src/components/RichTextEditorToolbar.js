@@ -6,22 +6,22 @@ const RichTextEditorToolbar = ({ onBold, onItalic, onUnderline, onImage, onCode,
   <AppBar position="static">
     <Toolbar>
       <Typography variant="h6">Rich Text Editor</Typography>
-      <IconButton color="inherit" onClick={onBold}>
+      <IconButton color="inherit" onClick={onBold} aria-label="Bold">
         <FormatBold />
       </IconButton>
-      <IconButton color="inherit" onClick={onItalic}>
+      <IconButton color="inherit" onClick={onItalic} aria-label="Italic">
         <FormatItalic />
       </IconButton>
-      <IconButton color="inherit" onClick={onUnderline}>
+      <IconButton color="inherit" onClick={onUnderline} aria-label="Underline">
         <FormatUnderlined />
       </IconButton>
-      <IconButton color="inherit" onClick={onImage}>
+      <IconButton color="inherit" onClick={onImage} aria-label="Insert Image">
         <Image />
       </IconButton>
-      <IconButton color="inherit" onClick={onCode}>
+      <IconButton color="inherit" onClick={onCode} aria-label="Code">
         <Code />
       </IconButton>
-      <IconButton color="inherit" onClick={onTable}>
+      <IconButton color="inherit" onClick={onTable} aria-label="Insert Table">
         <TableChart />
       </IconButton>
     </Toolbar>
