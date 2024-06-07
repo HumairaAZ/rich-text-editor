@@ -1,8 +1,39 @@
 import React, { useState } from 'react';
-import { Editor, EditorState, RichUtils, AtomicBlockUtils } from 'draft-js';
+import { Editor, EditorState, RichUtils, AtomicBlockUtils, DefaultDraftBlockRenderMap } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import RichTextEditorToolbar from './RichTextEditorToolbar';
+import ImageComponent from '../utils/ImageComponent';
+import TableComponent from '../utils/TableComponent';
+import { Map } from 'immutable';
 import './RichTextEditor.css';
+
+const blockRenderMap = Map({
+  'atomic': {
+    element: 'div',
+    wrapper: <div />,
+  },
+});
+
+const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(blockRenderMap);
+
+const mediaBlockRenderer = (block) => {
+  if (block.getType() === 'atomic') {
+    const type = block.getData().get('type');
+    if (type === 'image') {
+      return {
+        component: ImageComponent,
+        editable: false,
+      };
+    }
+    if (type === 'table') {
+      return {
+        component: TableComponent,
+        editable: false,
+      };
+    }
+  }
+  return null;
+};
 
 const RichTextEditor = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -62,6 +93,8 @@ const RichTextEditor = () => {
         <Editor
           editorState={editorState}
           handleKeyCommand={handleKeyCommand}
+          blockRenderMap={extendedBlockRenderMap}
+          blockRendererFn={mediaBlockRenderer}
           placeholder="Start typing..."
           onChange={setEditorState}
         />
