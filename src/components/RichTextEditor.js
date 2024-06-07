@@ -6,6 +6,51 @@ import ImageComponent from '../utils/ImageComponent';
 import TableComponent from '../utils/TableComponent';
 import { Map } from 'immutable';
 import './RichTextEditor.css';
+import { EditorState, RichUtils, AtomicBlockUtils, DefaultDraftBlockRenderMap, convertToRaw, convertFromRaw, Modifier } from 'draft-js';
+
+const RichTextEditor = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  // Undo/Redo Functions
+  const undo = () => setEditorState(EditorState.undo(editorState));
+  const redo = () => setEditorState(EditorState.redo(editorState));
+
+  // Alignment and Font Size Functions
+  const toggleBlockType = (blockType) => {
+    setEditorState(RichUtils.toggleBlockType(editorState, blockType));
+  };
+
+  const toggleFontSize = (fontSize) => {
+    const selection = editorState.getSelection();
+    const nextContentState = Object.keys(styleMap)
+      .reduce((contentState, font) => {
+        return Modifier.removeInlineStyle(contentState, selection, font);
+      }, editorState.getCurrentContent());
+
+    let nextEditorState = EditorState.push(
+      editorState,
+      nextContentState,
+      'change-inline-style'
+    );
+
+    const currentStyle = editorState.getCurrentInlineStyle();
+
+    if (selection.isCollapsed()) {
+      nextEditorState = currentStyle.reduce((state, style) => {
+        return RichUtils.toggleInlineStyle(state, style);
+      }, nextEditorState);
+    }
+
+    if (!currentStyle.has(fontSize)) {
+      nextEditorState = RichUtils.toggleInlineStyle(
+        nextEditorState,
+        fontSize
+      );
+    }
+
+    setEditorState(nextEditorState);
+  };
+
 
 const blockRenderMap = Map({
   'atomic': {
