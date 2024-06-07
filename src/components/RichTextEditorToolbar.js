@@ -1,8 +1,8 @@
 import React from 'react';
 import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
-import { FormatBold, FormatItalic, FormatUnderlined, FormatStrikethrough, FormatColorFill, FormatListBulleted, FormatListNumbered, Code, Undo, Redo } from '@material-ui/icons';
+import { FormatBold, FormatItalic, FormatUnderlined, FormatStrikethrough, FormatListBulleted, FormatListNumbered, Code, Undo, Redo } from '@material-ui/icons';
 
-const RichTextEditorToolbar = ({ onBold, onItalic, onUnderline, onStrikethrough, onHighlight, onBulletList, onNumberList, onCode, onUndo, onRedo }) => (
+const RichTextEditorToolbar = ({ onBold, onItalic, onUnderline, onStrikethrough, onBulletList, onNumberList, onCode, onUndo, onRedo }) => (
   <AppBar position="static" className="bg-gray-800">
     <Toolbar>
       <Typography variant="h6" className="text-white">Rich Text Editor</Typography>
@@ -17,9 +17,6 @@ const RichTextEditorToolbar = ({ onBold, onItalic, onUnderline, onStrikethrough,
       </IconButton>
       <IconButton color="inherit" onClick={onStrikethrough} aria-label="Strikethrough" className="hover:bg-gray-700 transition duration-300 ease-in-out transform hover:scale-110">
         <FormatStrikethrough />
-      </IconButton>
-      <IconButton color="inherit" onClick={onHighlight} aria-label="Highlight" className="hover:bg-gray-700 transition duration-300 ease-in-out transform hover:scale-110">
-        <FormatColorFill />
       </IconButton>
       <IconButton color="inherit" onClick={onBulletList} aria-label="Bullet List" className="hover:bg-gray-700 transition duration-300 ease-in-out transform hover:scale-110">
         <FormatListBulleted />
