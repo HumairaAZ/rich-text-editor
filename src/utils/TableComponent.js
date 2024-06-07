@@ -10,9 +10,7 @@ const TableComponent = ({ block, contentState }) => {
         {rows.map((row, rowIndex) => (
           <tr key={rowIndex}>
             {row.map((cell, cellIndex) => (
-              <td key={cellIndex} style={{ border: '1px solid black', padding: '8px', cursor: 'text' }} contentEditable>
-                {cell.trim()}
-              </td>
+              <td key={cellIndex} style={{ border: '1px solid black', padding: '8px' }}>{cell.trim()}</td>
             ))}
           </tr>
         ))}
