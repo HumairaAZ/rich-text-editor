@@ -1,6 +1,6 @@
 # Rich Text Editor
 
-Welcome to the Rich Text Editor project, a sophisticated and feature-rich text editor built with modern web technologies. This project demonstrates advanced front-end development skills, including the use of React, Slate.js, and Material-UI, to create a seamless and highly interactive user experience.
+Welcome to the Rich Text Editor project, a sophisticated and feature-rich text editor built with modern web technologies. This project demonstrates advanced front-end development skills, including the use of React, Slate.js, and Material-UI, to create a seamless and highly interactive user experience..
 
 ## Features
 
