@@ -17,7 +17,7 @@ const CustomIconButton = styled(IconButton)(({ theme }) => ({
   transition: 'transform 0.3s ease-in-out',
   '&:hover': {
     transform: 'scale(1.2)',
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: theme ? theme.palette.action.hover : 'rgba(0, 0, 0, 0.1)',
   },
 }));
 
