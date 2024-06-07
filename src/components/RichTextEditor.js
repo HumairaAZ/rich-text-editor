@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Editor, EditorState, RichUtils, AtomicBlockUtils, DefaultDraftBlockRenderMap } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import RichTextEditorToolbar from './RichTextEditorToolbar';
 import ImageComponent from '../utils/ImageComponent';
