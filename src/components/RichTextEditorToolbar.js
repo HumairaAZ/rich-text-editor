@@ -13,13 +13,13 @@ import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
 import { styled } from '@mui/system';
 
-const CustomIconButton = styled(IconButton)(({ theme }) => ({
+const CustomIconButton = styled(IconButton)({
   transition: 'transform 0.3s ease-in-out',
   '&:hover': {
     transform: 'scale(1.2)',
-    backgroundColor: theme ? theme.palette.action.hover : 'rgba(0, 0, 0, 0.1)',
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
   },
-}));
+});
 
 const RichTextEditorToolbar = ({ onBold, onItalic, onUnderline, onStrikethrough, onBulletList, onNumberList, onUndo, onRedo }) => (
   <AppBar position="static" color="primary">
