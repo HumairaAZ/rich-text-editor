@@ -50,7 +50,7 @@ const RichTextEditor = () => {
         onCode={onCodeClick}
         onTable={onTableClick}
       />
-      <div style={{ padding: '20px', border: '1px solid #ccc', marginTop: '10px' }}>
+      <div className="editor-container">
         <Editor
           editorState={editorState}
           handleKeyCommand={handleKeyCommand}
